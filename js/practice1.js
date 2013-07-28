@@ -20,6 +20,10 @@ var Person = Backbone.Model.extend({
   }
 });
 
+var PeopleCollection = Backbone.Collection.extend({
+  model: Person
+});
+
 var PersonView = Backbone.View.extend({
   tagName: 'li',
   
