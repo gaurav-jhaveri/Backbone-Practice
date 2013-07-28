@@ -24,16 +24,47 @@ var PeopleCollection = Backbone.Collection.extend({
   model: Person
 });
 
+var PeopleView = Backbone.View.extend({
+  tagName: 'ul',
+  
+  render: function(){
+    this.collection.each(function(person) {
+      var personView = new PersonView({model: person});
+      this.$el.append(personView.render().el); 
+    }, this);
+    return this;
+  }
+});
+
 var PersonView = Backbone.View.extend({
   tagName: 'li',
   
   template: _.template( $('#personTemplate').html()),
   
-  initialize: function(){
-    this.render();
-  },
   
   render: function(){
     this.$el.html(this.template(this.model.toJSON()));
+    return this;
   }
 });
+
+var peopleCollection = new PeopleCollection([
+    {
+        name: 'Gaurav Jhaveri',
+        age: 20,
+        occupation: "Programmer"
+    },
+    {
+        name: 'Bruce Wayne',
+        age: 74,
+        occupation: 'Vigilante'
+    },
+    {
+        name: 'Superman',
+        age: 75,
+        occupation: 'Superhero'
+    }
+]);
+
+var peopleView = new PeopleView({collection: peopleCollection});
+$(document.body).append(peopleView.render().el);
