@@ -52,7 +52,14 @@
     tagName: 'li',
   
     template: template('personTemplate'),
-  
+    
+    events: {
+      'click strong': 'showAlert'
+    },
+    
+    showAlert: function(){
+      alert("You clicked me!");
+    },
   
     render: function(){
       this.$el.html(this.template(this.model.toJSON()));
@@ -67,9 +74,9 @@
           occupation: "Programmer"
       },
       {
-          name: 'Bruce Wayne',
+          name: 'Tony Stark',
           age: 74,
-          occupation: 'Vigilante'
+          occupation: 'Billionaire'
       },
       {
           name: 'Superman',
